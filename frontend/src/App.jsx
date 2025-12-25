@@ -5,6 +5,8 @@ import Login from './pages/Login';
 import StudentDashboard from './pages/StudentDashboard';
 import WardenDashboard from './pages/WardenDashboard';
 import GatePassVerification from './pages/GatePassVerification';
+import MealDashboard from './pages/MealDashboard';
+import MealManagement from './pages/MealManagement';
 import Layout from './components/Layout';
 
 function ProtectedRoute({ children, requiredRole }) {
@@ -83,6 +85,26 @@ function AppRoutes() {
           <ProtectedRoute requiredRole="warden">
             <Layout>
               <GatePassVerification />
+            </Layout>
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/meals"
+        element={
+          <ProtectedRoute requiredRole="student">
+            <Layout>
+              <MealDashboard />
+            </Layout>
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/meals/management"
+        element={
+          <ProtectedRoute requiredRole="warden">
+            <Layout>
+              <MealManagement />
             </Layout>
           </ProtectedRoute>
         }
