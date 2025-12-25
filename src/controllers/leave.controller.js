@@ -15,7 +15,7 @@ export async function applyLeave(req, res, next) {
         from_date: new Date(from_date),
         to_date: new Date(to_date),
         reason,
-        status: "pending",
+        status: "PENDING",
       },
     });
 
@@ -51,7 +51,7 @@ export async function myLeaves(req, res, next) {
 export async function pendingLeaves(req, res, next) {
   try {
     const pending = await prisma.leave_requests.findMany({
-      where: { status: "pending" },
+      where: { status: "PENDING" },
       orderBy: { created_at: "desc" },
       include: {
         profiles: {
@@ -79,7 +79,7 @@ export async function approveLeave(req, res, next) {
     // 1) Approve leave
     const leave = await prisma.leave_requests.update({
       where: { id: leaveId },
-      data: { status: "approved" },
+      data: { status: "APPROVED" },
     });
 
     // 2) Create gate pass (if not exists)
@@ -107,7 +107,7 @@ export async function rejectLeave(req, res, next) {
   try {
     const rejected = await prisma.leave_requests.update({
       where: { id: req.params.id },
-      data: { status: "rejected" },
+      data: { status: "REJECTED" },
     });
 
     res.json(rejected);
@@ -124,7 +124,7 @@ export async function getGatePass(req, res, next) {
     });
     if (!leave) return res.status(404).json({ error: "Leave not found" });
 
-    if (leave.status !== "approved") {
+    if (leave.status !== "APPROVED") {
       return res.status(403).json({ error: "Gate pass available only after approval" });
     }
 
