@@ -34,6 +34,17 @@ export const gatePassAPI = {
   use: (code) => api.post('/gatepass/use', { code }),
 };
 
+// Meal API
+export const mealAPI = {
+  getMenu: () => api.get('/meals/menu'),
+  createMenu: (data) => api.post('/meals/menu', data),
+  getMyBookings: () => api.get('/meals/bookings/my'),
+  createBooking: (data) => api.post('/meals/bookings', data),
+  cancelBooking: (id) => api.delete(`/meals/bookings/${id}`),
+  getBookingsByDate: (date) => api.get(`/meals/bookings/date/${date}`),
+  getStats: () => api.get('/meals/stats'),
+};
+
 // Health check
 export const healthCheck = () => api.get('/health');
 
