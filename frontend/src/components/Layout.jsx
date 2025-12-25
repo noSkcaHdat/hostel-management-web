@@ -1,6 +1,6 @@
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { LogOut, Home, Shield, QrCode } from 'lucide-react';
+import { LogOut, Home, Shield, QrCode, UtensilsCrossed } from 'lucide-react';
 
 export default function Layout({ children }) {
   const { profile, signOut } = useAuth();
@@ -41,6 +41,17 @@ export default function Layout({ children }) {
                     >
                       My Leaves
                     </Link>
+                    <Link
+                      to="/meals"
+                      className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+                        isActive('/meals')
+                          ? 'bg-primary-100 text-primary-700'
+                          : 'text-gray-600 hover:bg-gray-100'
+                      }`}
+                    >
+                      <UtensilsCrossed className="w-4 h-4 inline mr-2" />
+                      Meal Booking
+                    </Link>
                   </>
                 )}
 
@@ -66,6 +77,17 @@ export default function Layout({ children }) {
                     >
                       <QrCode className="w-4 h-4 inline mr-2" />
                       Verify Gate Pass
+                    </Link>
+                    <Link
+                      to="/meals/management"
+                      className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+                        isActive('/meals/management')
+                          ? 'bg-primary-100 text-primary-700'
+                          : 'text-gray-600 hover:bg-gray-100'
+                      }`}
+                    >
+                      <UtensilsCrossed className="w-4 h-4 inline mr-2" />
+                      Meal Management
                     </Link>
                   </>
                 )}
